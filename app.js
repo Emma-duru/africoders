@@ -1,6 +1,9 @@
 const express = require("express");
 const mongoose = require("mongoose");
 require("dotenv").config();
+
+const postRoutes = require("./routes/post.routes");
+
 const app = express();
 
 app.set("view engine", "ejs");
@@ -17,9 +20,7 @@ mongoose.connect(
   }
 );
 
-app.get("/", (req, res) => {
-  res.render("home");
-});
+app.use("/", postRoutes);
 
 app.listen(4000, () => {
   console.log("Server is running");
