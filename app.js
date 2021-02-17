@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
 require("dotenv").config();
 
 const postRoutes = require("./routes/post.routes");
@@ -7,6 +8,8 @@ const postRoutes = require("./routes/post.routes");
 const app = express();
 
 app.set("view engine", "ejs");
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 mongoose.connect(
   process.env.MONGO_DBURI,
