@@ -1,0 +1,31 @@
+<%- include("./partials/header") %>
+
+    <div class="container my-4">
+        <div class="card" style="max-width: 920px; margin: auto">
+            <div class="card-header">
+                <h3 class="text-center">Edit Post</h3>
+            </div>
+            <form>
+                <div class="card-body mx-4">
+                        <input type="text" name="title" placeholder="Post Title" class="form-control my2">
+                        <textarea name="body" placeholder="Post Body" rows="10" cols="30" class="form-control my-2"></textarea>
+                        <select name="category" class="form-control my-2">
+                            <option>-- Select Post Category --</option>
+                            <option value="misc">Miscellaneous</option>
+                            <option value="javascript">JavaScript</option>
+                            <option value="htmlandcss">HTML & CSS</option>
+                            <option value="python">Python</option>
+                            <option value="flutter">Flutter</option>
+                            <option value="jobs">Jobs</option>
+                        </select>
+                </div>
+                <div class="card-footer text-muted">
+                    <button class="btn btn-primary">Edit Post</button>
+                    <a href="#" class="btn btn-secondary">Cancel</a>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+<%- include("./partials/footer") %> 
