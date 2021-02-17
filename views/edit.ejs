@@ -5,10 +5,10 @@
             <div class="card-header">
                 <h3 class="text-center">Edit Post</h3>
             </div>
-            <form>
+            <form id="edit-form">
                 <div class="card-body mx-4">
-                        <input type="text" name="title" placeholder="Post Title" class="form-control my2">
-                        <textarea name="body" placeholder="Post Body" rows="10" cols="30" class="form-control my-2"></textarea>
+                        <input type="text" name="title" placeholder="Post Title" class="form-control my2" value="<%= post.title %> ">
+                        <textarea name="body" placeholder="Post Body" rows="10" cols="30" class="form-control my-2"><%= post.body %> </textarea>
                         <select name="category" class="form-control my-2">
                             <option>-- Select Post Category --</option>
                             <option value="misc">Miscellaneous</option>
@@ -27,5 +27,30 @@
         </div>
 
     </div>
+
+    <script>
+        const editForm = document.getElementById("edit-form")
+
+        editForm.addEventListener("submit", async(e) => {
+            e.preventDefault()
+            const title = editForm.title.value;
+            const body = editForm.body.value;
+            const category = editForm.category.value;
+
+            try {
+                const res = await fetch("/<%= post.slug %>/edit", {
+                    method: "PUT",
+                    body: JSON.stringify({ title, body, category}),
+                    headers: {"Content-Type": "application/json"}
+                })
+                const data = await res.json()
+                if (data.post) {
+                    location.assign("/")
+                }
+            } catch (error) {
+                console.log(error)
+            }
+        })
+    </script>
 
 <%- include("./partials/footer") %> 
