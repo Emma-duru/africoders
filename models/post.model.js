@@ -27,6 +27,15 @@ const postSchema = new mongoose.Schema(
   }
 );
 
+postSchema.virtual("comments", {
+  ref: "Comment",
+  localField: "_id",
+  foreignField: "post",
+});
+
+postSchema.set("toJSON", { virtuals: true });
+postSchema.set("toObject", { virtuals: true });
+
 postSchema.pre("validate", function () {
   this.slug = slugify(this.title) + "-" + this._id.toString().slice(13);
 });
