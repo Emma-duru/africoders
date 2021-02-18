@@ -28,6 +28,28 @@
                         </button>
                     </div>
                 </div>
+
+                <div class="comments mt-4">
+                    <h4 class="text-center my-3">Comments</h4>
+                    <form id="comment-create" class="my-4">
+                        <textarea name="body" class="form-control my-2" cols="10" rows="3"></textarea>
+                        <button type="submit" class="btn btn-primary ml-auto">Add Comment</button>
+                    </form>
+                    <% if (post.comments.length > 0) { %> 
+                        <% post.comments.reverse().map(comment => { %>
+                            <div class="border-bottom py-2" style="display: flex">
+                                <img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8aHVtYW58ZW58MHx8MHw%3D&ixlib=rb-1.2.1&w=1000&q=80" style="height: 70px; margin-right: 30px;" alt="">
+                                <div class="comment-content">
+                                    <p><%= comment.body %> </p>
+                                    <small class="text-muted">Posted by <strong>User</strong> on <strong><%= comment.body %></strong></small>
+                                </div>
+                            </div>
+                        <% }) %> 
+                    <% } else { %> 
+                        <p class="text-center">There are no comments</p>
+                    <% } %> 
+                        
+                </div>
             </div>
             </div>
         </div>
@@ -68,6 +90,25 @@
                 }
             } catch (error) {
                 console.log(error)
+            }
+        })
+
+        const commentCreate = document.getElementById("comment-create")
+        commentCreate.addEventListener("submit", async(e) => {
+            e.preventDefault()
+            const body = commentCreate.body.value
+            try {
+                const res = await fetch("/<%= post.slug %>/create", {
+                    method: "POST",
+                    body: JSON.stringify({body}),
+                    headers: {"Content-Type": "application/json"}
+                })
+                const data = await res.json()
+                if (data.comment) {
+                    window.location = window.location
+                }
+            } catch(err) {
+                console.log(err)
             }
         })
     </script>

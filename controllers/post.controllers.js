@@ -1,4 +1,5 @@
 const Post = require("../models/post.model");
+const Comment = require("../models/comment.model");
 
 const posts_get = async (req, res) => {
   try {
@@ -26,7 +27,7 @@ const create_post = async (req, res) => {
 const post_detail = async (req, res) => {
   const { slug } = req.params;
   try {
-    const post = await Post.findOne({ slug });
+    const post = await Post.findOne({ slug }).populate("comments");
     res.render("detail", { title: post.title, post });
   } catch (error) {
     console.log(error);
