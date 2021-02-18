@@ -38,7 +38,7 @@
             const category = editForm.category.value;
 
             try {
-                const res = await fetch("/<%= post.slug %>/edit", {
+                const res = await fetch("/<%= post.slug %>", {
                     method: "PUT",
                     body: JSON.stringify({ title, body, category}),
                     headers: {"Content-Type": "application/json"}

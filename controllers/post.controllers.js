@@ -2,7 +2,7 @@ const Post = require("../models/post.model");
 
 const posts_get = async (req, res) => {
   try {
-    const posts = await Post.find();
+    const posts = await Post.find().sort("-createdAt");
     res.render("home", { title: "Home", posts });
   } catch (error) {
     console.log(error);
@@ -57,6 +57,16 @@ const edit_post = async (req, res) => {
   }
 };
 
+const delete_post = async (req, res) => {
+  const { slug } = req.params;
+  try {
+    const post = await Post.findOneAndDelete({ slug });
+    res.json({ post });
+  } catch (error) {
+    res.json({ error });
+  }
+};
+
 module.exports = {
   posts_get,
   create_get,
@@ -64,4 +74,5 @@ module.exports = {
   post_detail,
   edit_get,
   edit_post,
+  delete_post,
 };

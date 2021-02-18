@@ -6,6 +6,7 @@ router.get("/create", postControllers.create_get);
 router.post("/create", postControllers.create_post);
 router.get("/:slug", postControllers.post_detail);
 router.get("/:slug/edit", postControllers.edit_get);
-router.put("/:slug/edit", postControllers.edit_post);
+router.put("/:slug", postControllers.edit_post);
+router.delete("/:slug", postControllers.delete_post);
 
 module.exports = router;
