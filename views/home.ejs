@@ -3,23 +3,27 @@
     <div class="container my-4">
         <div class="card">
             <div class="card-header">
-                <h3 class="text-center">Latest Posts</h3>
+                <h3 class="text-center"><%= title || "Latest" %>  Posts</h3>
             </div>
             <div class="card-body p-4">
-                <% posts.map(post => { %> 
-                    <div class="border-bottom p-2" style="display: flex;">
-                        <img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8aHVtYW58ZW58MHx8MHw%3D&ixlib=rb-1.2.1&w=1000&q=80" style="height: 70px; margin-right: 30px;" alt="">
-                        <div class="forum-content">
-                            <h4><a href="/<%= post.slug %>"><%= post.title %> </a></h4>
-                            <p class="text-muted">posted by <strong>User</strong> on <strong><%= post.date_created %> </strong> (3 comments)</p>
+                <% if (posts.length > 0) { %> 
+                    <% posts.map(post => { %> 
+                        <div class="border-bottom p-2" style="display: flex;">
+                            <img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8aHVtYW58ZW58MHx8MHw%3D&ixlib=rb-1.2.1&w=1000&q=80" style="height: 70px; margin-right: 30px;" alt="">
+                            <div class="forum-content">
+                                <h4><a href="/<%= post.slug %>"><%= post.title %> </a></h4>
+                                <p class="text-muted">posted by <strong>User</strong> on <strong><%= post.date_created %> </strong> (3 comments)</p>
+                            </div>
                         </div>
-                    </div>
-                <% }) %>
+                    <% }) %>
+                <% } else { %> 
+                    <p class="text-center">There are no posts</p>
+                <% } %> 
             </div>
-            <div class="card-footer text-muted">
+            <!-- <div class="card-footer text-muted">
                 <a href="#" class="float-right">Older posts</a>
                 <a href="#" class="ml-auto">Older posts</a>
-            </div>
+            </div> -->
         </div>
     </div>
     

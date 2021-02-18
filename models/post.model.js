@@ -14,7 +14,15 @@ const postSchema = new mongoose.Schema(
     },
     category: {
       type: String,
-      enum: ["javascript", "php", "python", "flutter", "misc", "jobs"],
+      enum: [
+        "javascript",
+        "php",
+        "python",
+        "htmlandcss",
+        "flutter",
+        "misc",
+        "jobs",
+      ],
       default: "misc",
     },
     slug: {

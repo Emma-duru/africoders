@@ -9,6 +9,7 @@ router.get("/:slug", postControllers.post_detail);
 router.get("/:slug/edit", postControllers.edit_get);
 router.put("/:slug", postControllers.edit_post);
 router.delete("/:slug", postControllers.delete_post);
+router.get("/posts/:category", postControllers.category_get);
 
 // Comment routes
 router.post("/:slug/create", commentControllers.comment_create);

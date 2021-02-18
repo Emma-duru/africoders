@@ -68,6 +68,23 @@ const delete_post = async (req, res) => {
   }
 };
 
+const capitalize = ([first, ...rest], lowerRest = false) =>
+  first.toUpperCase() +
+  (lowerRest ? rest.join("").toLowerCase() : rest.join(""));
+
+const category_get = async (req, res) => {
+  const { category } = req.params;
+  try {
+    const posts = await Post.find({ category });
+    let categoryTitle;
+    if (category === "htmlandcss") categoryTitle = "HTML & CSS";
+    if (category === "php") categoryTitle = "PHP";
+    res.render("home", { title: capitalize(categoryTitle || category), posts });
+  } catch (error) {
+    res.json({ error });
+  }
+};
+
 module.exports = {
   posts_get,
   create_get,
@@ -76,4 +93,5 @@ module.exports = {
   edit_get,
   edit_post,
   delete_post,
+  category_get,
 };
