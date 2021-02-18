@@ -13,4 +13,14 @@ const comment_create = async (req, res) => {
   }
 };
 
-module.exports = { comment_create };
+const comment_delete = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const comment = await Comment.findByIdAndDelete(id);
+    res.json({ comment });
+  } catch (error) {
+    res.json({ error });
+  }
+};
+
+module.exports = { comment_create, comment_delete };

@@ -12,5 +12,6 @@ router.delete("/:slug", postControllers.delete_post);
 
 // Comment routes
 router.post("/:slug/create", commentControllers.comment_create);
+router.delete("/:slug/:id", commentControllers.comment_delete);
 
 module.exports = router;

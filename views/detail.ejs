@@ -43,6 +43,7 @@
                                     <p><%= comment.body %> </p>
                                     <small class="text-muted">Posted by <strong>User</strong> on <strong><%= comment.body %></strong></small>
                                 </div>
+                                <div id="<%= comment._id %>" class="comment-delete ml-auto mr-3" style="cursor: pointer;"><i class="fas fa-trash ml-auto mr-3 text-danger"></i></div>
                             </div>
                         <% }) %> 
                     <% } else { %> 
@@ -111,6 +112,23 @@
                 console.log(err)
             }
         })
+
+        const commentDeleteBtns = document.querySelectorAll(".comment-delete")
+        for(commentDeleteBtn of commentDeleteBtns) {
+            commentDeleteBtn.addEventListener("click", async function() {
+                try {
+                    const res = await fetch(`/<%= post.slug %>/${this.id}`, {
+                        method: "DELETE"
+                    })
+                    const data = await res.json()
+                    if (data.comment) {
+                        window.location = window.location
+                    } 
+                } catch (err) {
+                    console.log(err)
+                }
+            })
+        }
     </script>
     
 <%- include("./partials/footer") %>
