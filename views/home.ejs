@@ -13,7 +13,7 @@
                             <div class="forum-content">
                                 <h4><a href="/<%= post.slug %>"><%= post.title %> </a></h4>
                                 <p class="text-muted">
-                                <a href="/posts/<%= post.category %>"><span class="badge bg-secondary"><%= post.category %></span></a> posted on <strong><%= post.date_created %> </strong> (<%= post.comments.length %>  comments) </p>
+                                <a href="/posts/<%= post.category %>"><span class="badge bg-secondary"><%= post.category %></span></a> posted by <strong><a href="/user/<%= post.author.username %>"><%= post.author.username %> </a></strong> on <strong><%= post.date_created %> </strong> (<%= post.comments.length %>  comments) </p>
                             </div>
                         </div>
                     <% }) %>
