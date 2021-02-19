@@ -7,6 +7,7 @@ router.get("/:username", async (req, res) => {
   try {
     const user = await User.findOne({ username });
     const posts = await Post.find({ author: user._id })
+      .sort("-createdAt")
       .populate("comments")
       .populate("author");
     res.render("profile", { title: user.username, checkedUser: user, posts });

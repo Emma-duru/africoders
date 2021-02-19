@@ -85,6 +85,7 @@ const category_get = async (req, res) => {
   const { category } = req.params;
   try {
     const posts = await Post.find({ category })
+      .sort("-createdAt")
       .populate("comments")
       .populate("author");
     let categoryTitle;
