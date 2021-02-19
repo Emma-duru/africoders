@@ -3,7 +3,7 @@
     <div class="container my-4">
         <div class="card">
             <div class="card-header">
-                <h3 class="text-center"><%= title || "Latest" %>  Posts</h3>
+                <h3 class="text-center"><%= title || "Latest" %> Posts</h3>
             </div>
             <div class="card-body p-4">
                 <% if (posts.length > 0) { %> 
@@ -13,13 +13,14 @@
                             <div class="forum-content">
                                 <h4><a href="/<%= post.slug %>"><%= post.title %> </a></h4>
                                 <p class="text-muted">
-                                <a href="/posts/<%= post.category %>"><span class="badge bg-secondary"><%= post.category %></span></a> posted by <strong><a href="/user/<%= post.author.username %> "><%= post.author.username %></a> </strong> on <strong><%= post.date_created %> </strong> (<% if (post.comments) { %> <%= post.comments.length %> <% } else { %> 0 <% } %>comments) </p>
+                                <a href="/posts/<%= post.category %>"><span class="badge bg-secondary"><%= post.category %></span></a> posted on <strong><%= post.date_created %> </strong> (<%= post.comments.length %>  comments) </p>
                             </div>
                         </div>
                     <% }) %>
                 <% } else { %> 
                     <p class="text-center">There are no posts</p>
                 <% } %> 
+                
             </div>
         </div>
     </div>

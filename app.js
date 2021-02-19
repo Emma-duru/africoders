@@ -4,8 +4,6 @@ const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
 const passport = require("passport");
 const cookieSession = require("cookie-session");
-// const compression = require("compression");
-// const helmet = require("helmet");
 require("dotenv").config();
 
 const postRoutes = require("./routes/post.routes");
@@ -20,8 +18,6 @@ app.set("view engine", "ejs");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
-// app.use(compression());
-// app.use(helmet());
 
 app.use(
   cookieSession({
