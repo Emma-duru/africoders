@@ -6,7 +6,11 @@ const comment_create = async (req, res) => {
   const { slug } = req.params;
   try {
     const post = await Post.findOne({ slug });
-    const comment = await Comment.create({ body, post: post._id });
+    const comment = await Comment.create({
+      body,
+      post: post._id,
+      author: req.user,
+    });
     res.json({ comment });
   } catch (error) {
     res.json({ error });

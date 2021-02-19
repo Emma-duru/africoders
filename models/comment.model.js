@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { DateTime } = require("luxon");
 
 const commentSchema = new mongoose.Schema(
   {
@@ -9,6 +10,10 @@ const commentSchema = new mongoose.Schema(
     post: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Post",
+    },
+    author: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
     },
   },
   {

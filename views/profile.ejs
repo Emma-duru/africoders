@@ -5,10 +5,10 @@
             <div class="col-md-3 mb-4">
                 <div class="card">
                     <div class="card-body text-center p-4">
-                        <img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8aHVtYW58ZW58MHx8MHw%3D&ixlib=rb-1.2.1&w=1000&q=80" style="height: 100px;" alt="">
+                        <img src="<%= checkedUser.imageUrl %> " style="height: 100px;" alt="">
                         <div class="my-3">
-                            <h4 class="card-title">Username</h4>
-                            <p class="text-muted">Joined Feb 17, 2021</p>
+                            <h4 class="card-title"><%= checkedUser.username %> </h4>
+                            <p class="text-muted">Joined <%= checkedUser.date_created %> </p>
                         </div>
                     </div>
                 </div>
@@ -19,39 +19,22 @@
                         <h3 class="text-center">My Posts</h3>
                     </div>
                     <div class="card-body p-4">
-                        <div class="border-bottom py-2" style="display: flex;">
-                            <img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8aHVtYW58ZW58MHx8MHw%3D&ixlib=rb-1.2.1&w=1000&q=80" style="height: 70px; margin-right: 30px;" alt="">
-                            <div class="forum-content">
-                                <h4><a href="#">This is a post title</a></h4>
-                                <p class="text-muted">posted by <strong>User</strong> on <strong>Feb 16, 2020</strong> (3 comments)</p>
-                            </div>
+                       <% if (posts.length > 0) { %> 
+                            <% posts.map(post => { %> 
+                                <div class="border-bottom p-2" style="display: flex;">
+                                    <img src="<%= post.author.imageUrl %> " style="height: 70px; margin-right: 30px;" alt="">
+                                    <div class="forum-content">
+                                        <h4><a href="/<%= post.slug %>"><%= post.title %> </a></h4>
+                                        <p class="text-muted">
+                                        <a href="/posts/<%= post.category %>"><span class="badge bg-secondary"><%= post.category %></span></a> posted on <strong><%= post.date_created %> </strong> (<%= post.comments.length %>  comments) </p>
+                                    </div>
+                                </div>
+                            <% }) %>
+                        <% } else { %> 
+                            <p class="text-center">There are no posts</p>
+                        <% } %> 
+                        
                         </div>
-                        <div class="border-bottom py-2" style="display: flex;">
-                            <img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8aHVtYW58ZW58MHx8MHw%3D&ixlib=rb-1.2.1&w=1000&q=80" style="height: 70px; margin-right: 30px;" alt="">
-                            <div class="forum-content">
-                                <h4><a href="#">This is a post title</a></h4>
-                                <p class="text-muted">posted by <strong>User</strong> on <strong>Feb 16, 2020</strong> (3 comments)</p>
-                            </div>
-                        </div>
-                        <div class="border-bottom py-2" style="display: flex;">
-                            <img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8aHVtYW58ZW58MHx8MHw%3D&ixlib=rb-1.2.1&w=1000&q=80" style="height: 70px; margin-right: 30px;" alt="">
-                            <div class="forum-content">
-                                <h4><a href="#">This is a post title</a></h4>
-                                <p class="text-muted">posted by <strong>User</strong> on <strong>Feb 16, 2020</strong> (3 comments)</p>
-                            </div>
-                        </div>
-                        <div class="border-bottom py-2" style="display: flex;">
-                            <img src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8aHVtYW58ZW58MHx8MHw%3D&ixlib=rb-1.2.1&w=1000&q=80" style="height: 70px; margin-right: 30px;" alt="">
-                            <div class="forum-content">
-                                <h4><a href="#">This is a post title</a></h4>
-                                <p class="text-muted">posted by <strong>User</strong> on <strong>Feb 16, 2020</strong> (3 comments)</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer text-muted">
-                        <a href="#" class="float-right">Older posts</a>
-                        <a href="#" class="ml-auto">Older posts</a>
-                    </div>
                 </div>
             </div>
         </div>

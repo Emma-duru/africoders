@@ -25,6 +25,10 @@ const postSchema = new mongoose.Schema(
       ],
       default: "misc",
     },
+    author: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
     slug: {
       type: String,
       unique: true,

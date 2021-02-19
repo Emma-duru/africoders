@@ -3,7 +3,10 @@ const Comment = require("../models/comment.model");
 
 const posts_get = async (req, res) => {
   try {
-    const posts = await Post.find().sort("-createdAt");
+    const posts = await Post.find()
+      .sort("-createdAt")
+      .populate("comments")
+      .populate("author");
     res.render("home", { title: "Home", posts });
   } catch (error) {
     console.log(error);
@@ -17,7 +20,12 @@ const create_get = (req, res) => {
 const create_post = async (req, res) => {
   const { title, body, category } = req.body;
   try {
-    const post = await Post.create({ title, body, category });
+    const post = await Post.create({
+      title,
+      body,
+      category,
+      author: req.user._id,
+    });
     res.json({ post });
   } catch (error) {
     res.json({ error });
@@ -27,8 +35,9 @@ const create_post = async (req, res) => {
 const post_detail = async (req, res) => {
   const { slug } = req.params;
   try {
-    const post = await Post.findOne({ slug }).populate("comments");
-    res.render("detail", { title: post.title, post });
+    const post = await Post.findOne({ slug }).populate("author");
+    const comments = await Comment.find({ post: post._id }).populate("author");
+    res.render("detail", { title: post.title, post, comments });
   } catch (error) {
     console.log(error);
   }
@@ -75,7 +84,9 @@ const capitalize = ([first, ...rest], lowerRest = false) =>
 const category_get = async (req, res) => {
   const { category } = req.params;
   try {
-    const posts = await Post.find({ category });
+    const posts = await Post.find({ category })
+      .populate("comments")
+      .populate("author");
     let categoryTitle;
     if (category === "htmlandcss") categoryTitle = "HTML & CSS";
     if (category === "php") categoryTitle = "PHP";

@@ -22,7 +22,7 @@ passport.use(
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
-        const currentUser = await User.findOne({ googleId: profile.id });
+        const currentUser = await User.findOne({ platformId: profile.id });
         if (currentUser) {
           done(null, currentUser);
         } else {

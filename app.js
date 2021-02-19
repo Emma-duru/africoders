@@ -7,7 +7,10 @@ const cookieSession = require("cookie-session");
 require("dotenv").config();
 
 const postRoutes = require("./routes/post.routes");
+const authRoutes = require("./routes/auth.routes");
+const userRoutes = require("./routes/user.routes");
 const passportConfig = require("./config/passport.config");
+const { checkUser } = require("./middleware/auth");
 
 const app = express();
 
@@ -42,27 +45,9 @@ mongoose.connect(
   }
 );
 
-const checkUser = (req, res, next) => {
-  res.locals.user = req.user;
-  next();
-};
-
+app.use("/auth", authRoutes);
 app.use("/", checkUser, postRoutes);
-
-app.get(
-  "/auth/github",
-  passport.authenticate("github", {
-    scope: ["profile"],
-  })
-);
-
-app.get(
-  "/auth/github/redirect",
-  passport.authenticate("github", { failureRedirect: "/login" }),
-  (req, res) => {
-    res.redirect("/");
-  }
-);
+app.use("/user", userRoutes);
 
 app.listen(4000, () => {
   console.log("Server is running");
