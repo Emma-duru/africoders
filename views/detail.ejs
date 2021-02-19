@@ -50,7 +50,9 @@
                                     <p><%= comment.body %> </p>
                                     <small class="text-muted">Posted by <strong><a href="/user/<%= comment.author.username %>"><%= comment.author.username %></a> </strong> on <strong><%= comment.date_created %></strong></small>
                                 </div>
+                                <%= if (user && comment.username == user.username) { %> 
                                 <div id="<%= comment._id %>" class="comment-delete ml-auto mr-3" style="cursor: pointer;"><i class="fas fa-trash ml-auto mr-3 text-danger"></i></div>
+                                <% } %> 
                             </div>
                         <% }) %> 
                     <% } else { %> 
